@@ -577,7 +577,7 @@ def model_complie(df, model, fs_method, div, analyze, super_label, df_type, doma
          right.write(f'Selected Features : {list(X.columns[selector.get_support(indices=True)])}')
          X_test = selector.transform(X_test_scaled)
 
-     if fs_method == 'OMP':
+     elif fs_method == 'OMP':
          from sklearn.preprocessing import StandardScaler, LabelEncoder
          le = LabelEncoder()
          X_train_scaled = scaler.fit_transform(X_train)
@@ -601,7 +601,7 @@ def model_complie(df, model, fs_method, div, analyze, super_label, df_type, doma
     #      X_train = X_train.loc[:,selectd_features]
     #      X_test =  X_test.loc[:,selectd_features]
 
-     if fs_method == 'PCA':
+     elif fs_method == 'PCA':
          from sklearn.preprocessing import StandardScaler, LabelEncoder
          le = LabelEncoder()
          X_train_scaled = scaler.fit_transform(X_train)
@@ -625,13 +625,16 @@ def model_complie(df, model, fs_method, div, analyze, super_label, df_type, doma
     #      X_test = r.transform(X_test)
 
 
-     if fs_method == 'Genetic Algorithm':
+     elif fs_method == 'Genetic Algorithm':
         X_std = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
         X_new = geneticAlgo(X_std,Y,k = k)
         X_array = [x in X_new.columns for x in X.columns]
         right.write(f'Selected Features : {len(list(X.columns[X_array]))} out of {len(X.columns)} features')
         right.write(f'Selected Features : {list(X.columns[X_array])}')
         X_train, X_test, y_train, y_test = train_test_split( X_new, Y, test_size=0.25, random_state=42)
+     else :
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
     
     #  scaler2 = MinMaxScaler()
     #  X_train = scaler2.fit_transform(X_train)
