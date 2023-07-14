@@ -473,7 +473,7 @@ def model_complie(df, model, fs_method, div, analyze, super_label, df_type, doma
      models = {
     "Logistic Regression" :  LogisticRegression(C=500,random_state=0, max_iter=100000),
     "SVM": SVC(probability=True, C= 500, gamma =  0.1, kernel =  'linear'),
-    "KNN" :  KNeighborsClassifier(metric = 'manhattan', n_neighbors =  5, weights= 'uniform'),
+    "KNN" :  KNeighborsClassifier(metric = 'minkowski', n_neighbors =  7, weights= 'distance'),
     "Decision Tree" : DecisionTreeClassifier(max_depth=None),
     "Random Forest" :  RandomForestClassifier(n_estimators=100,
                                   max_features = 'sqrt',
