@@ -467,7 +467,7 @@ def model_complie(df, model, fs_method, div, analyze, super_label, df_type, doma
      from sklearn.metrics import accuracy_score, classification_report
      from sklearn.preprocessing import StandardScaler, LabelEncoder, MinMaxScaler
 
-     scaler = StandardScaler()
+     scaler = MinMaxScaler()
      
      # Models
      models = {
