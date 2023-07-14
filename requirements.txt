@@ -7,4 +7,5 @@ scikit_learn==1.1.2
 scipy==1.11.1
 sklearn_relief==1.0.0b2
 streamlit==1.23.1
+seaborn==0.11.2
 
