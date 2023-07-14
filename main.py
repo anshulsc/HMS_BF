@@ -471,15 +471,15 @@ def model_complie(df, model, fs_method, div, analyze, super_label, df_type, doma
      
      # Models
      models = {
-      "Logistic Regression" :  LogisticRegression(random_state=0, max_iter=100000, C= 500),
-      "SVM": SVC(probability=True, C= 500, gamma =  0.1, kernel =  'linear'),
-      "KNN" :  KNeighborsClassifier(n_neighbors=13, metric='manhattan'),
-      "Decision Tree" : DecisionTreeClassifier(max_depth=None),
-      "Random Forest" :  RandomForestClassifier(n_estimators=400,
+    'lr' :  LogisticRegression(C=500,random_state=0, max_iter=100000),
+    'svc': SVC(probability=True, C= 500, gamma =  0.1, kernel =  'linear'),
+    'knn' :  KNeighborsClassifier(metric = 'minkowski', n_neighbors =  13, weights= 'distance'),
+    'dt' : DecisionTreeClassifier(max_depth=None),
+    'rf' :  RandomForestClassifier(n_estimators=100,
                                   max_features = 'sqrt',
                                   max_depth= None,
                                   bootstrap=True)
-     }
+}
 
      num_segments = total_segments
      frame_size = int(df[list(df.keys())[0]].shape[0] // num_segments)
