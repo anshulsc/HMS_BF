@@ -421,21 +421,24 @@ def plot_roc(model, X_test, y_test,fs_method,le):
         fpr[i], tpr[i], _ = roc_curve(y_test, y_pred_prob[:, i], pos_label=model.classes_[i])
         roc_auc[i] = auc(fpr[i], tpr[i])
 
-    # Create the figure
-    fig, ax = plt.subplots()
-    colors = ['blue', 'red', 'green', 'orange', 'purple']  # You can add more colors for more classes
-    for i, color in zip(range(n_classes), colors):
-        ax.plot(fpr[i], tpr[i], color=color, lw=2, label='ROC curve for class {} (area = {:.2f})'.format(
-            list(model.classes_)[i] if fs_method != "ReliefF" else list(le.classes_)[i], roc_auc[i]))
-    ax.plot([0, 1], [0, 1], color='black', lw=2, linestyle='--')
-    ax.set_xlim([0.0, 1.0])
-    ax.set_ylim([0.0, 1.05])
-    ax.set_xlabel('False Positive Rate')
-    ax.set_ylabel('True Positive Rate')
-    ax.set_title('Receiver operating characteristic')
-    ax.legend(loc="lower right")
-
+     # Plot ROC curve for each class
+    fig = plt.figure()
+    colors = ['blue', 'red', 'green', 'cyan', 'magenta', 'yellow', 'black', 'white',
+          'gray', 'lightblue', 'darkblue', 'lightgreen', 'darkgreen', 'lightgray',
+          'darkgray', 'lightyellow', 'darkyellow', 'orange', 'purple', 'pink']
+ # You can add more colors for more classes
+    for i, color in zip(range(len(model.classes_)), colors):
+        plt.plot(fpr[i], tpr[i], color=color, lw=2, label='ROC curve for class {} (area = {:.2f})'.format(list(model.classes_)[i], roc_auc[i]))
+    plt.plot([0, 1], [0, 1], color='green', lw=2, linestyle='--')
+    plt.xlim([-0.05, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.grid(True, linestyle='--')
+    plt.title('Receiver operating characteristic')
+    plt.legend(loc="lower right")
     return fig
+
 import seaborn as sns
 def plot_cm(model, name, X_test, y_test, fs_method, le):
     from sklearn import metrics
